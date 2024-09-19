@@ -1,0 +1,136 @@
+:root {
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Merriweather', serif;
+    --color-light: #e0e0e0;
+    --color-dark: #1f1f1f;
+    --color-darker: #2a2a2a;
+    --color-darkest: #0f0f0f;
+    --color-accent: #d2b68f;
+    --color-button: #6e4e4d;
+    --color-button-hover: #8a6e6e;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-light);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #2a1c0e, var(--color-darkest)); 
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+#blackmarket-ui {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    background: var(--color-dark); 
+    color: var(--color-light);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--color-button);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); 
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out, scaleUp 0.5s ease-out;
+    z-index: 1000; /
+    background-size: cover;
+    background-blur: 5px;
+}
+
+#blackmarket-ui h1 {
+    margin: 0 0 20px;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--color-accent); 
+    letter-spacing: 2px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+    font-family: var(--font-secondary); 
+}
+
+.menu {
+    margin-top: 20px;
+}
+
+#products div {
+    margin: 15px 0;
+    padding: 20px;
+    background: var(--color-darker); 
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 25px;
+    font-size: 20px;
+    position: relative;
+    border: 1px solid var(--color-button); 
+    animation: fadeInUp 0.5s ease-out;
+}
+
+#products div:hover {
+    background: #3a3a3a; 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); 
+}
+
+#products div span.price {
+    font-weight: bold;
+    color: var(--color-accent); 
+}
+
+button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    background: var(--color-button); 
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); 
+}
+
+button:hover {
+    background: var(--color-button-hover); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); 
+    transform: translateY(-2px); 
+}
+
+/* Animationer */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
