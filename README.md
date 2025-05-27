@@ -10,16 +10,18 @@ to your own liking.
 
 # Features
 - Customizable peds and their locations.
+- Have certain items for different peds.
+- Choose between ox/qb/nui.
 - Randomising peds & their locations.
 - Blackmarket active time. Only active between the time you state in the config.lua.
-- Dispatch, Do you want the police to have a chance to get alerted when a player opens the blackmarketUI? (Only for peds)
+- Dispatch, Do you want the police to have a chance to get alerted when a player opens the blackmarketUI? ps-dispatch, cd-disptach and qb-dispatch
 - You can also choose how big of a chance the alert has in the "Config.ChanceValue"
 - Turn off/on blips for the blackmarket. Always turn off if you use items.
+- Able to give ammo directly when selling a weapon.
 
 And more to coming!
 
 Planning for the future:
-- Add pictures to the blackmarket items.
 - Add some sort of pickup system.
 - Add the possibility to do a quest for the blackmarket guy and earn things for it.
 And much more!
@@ -28,11 +30,6 @@ Hope you like the script as it is right now!
 More will come for it!
 
 # Install:
-
-Item:
-blackmarketipad             = { name = "blackmarketipad", label = "Ipad", weight = 150, type = "item", image = "blackmarketipad.png", unique = false, useable = false, shouldClose = true, combinable = nil, description = "An ipad?...", },
-
-You can find an picture in html/images
 
 # ps-dispatch compatibility (install)
 
