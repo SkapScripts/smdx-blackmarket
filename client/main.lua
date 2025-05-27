@@ -1,5 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-
+if Config.TargetSystem ~= "ox" and Config.TargetSystem ~= "qb" then
+    error("[SkapBlackMarket] Invalid TargetSystem: " .. tostring(Config.TargetSystem))
+end
 local function GetRandomPrice(min, max)
     return math.random(min, max)
 end
@@ -268,18 +270,31 @@ local function SpawnAllBlackMarketPeds()
             local scenario = scenarioList[math.random(#scenarioList)]
             TaskStartScenarioInPlace(ped, scenario, 0, true)
 
-            exports['qb-target']:AddTargetEntity(ped, {
-                options = {
-                    {
-                        type = "client",
-                        event = "SkapBlackMarket:Openblackmarket",
-                        icon = "fas fa-user-secret",
-                        label = pedData.label or "Blackmarket",
-                        args = pedKey
-                    }
-                },
-                distance = 2.0
-            })
+           if Config.TargetSystem == "ox" then
+            exports.ox_target:addLocalEntity(ped, {
+        {
+            name = "open_blackmarket_" .. pedKey,
+            icon = "fas fa-user-secret",
+            label = pedData.label or "Blackmarket",
+            onSelect = function()
+                TriggerEvent("SkapBlackMarket:Openblackmarket", { args = pedKey })
+            end
+        }
+    })
+else
+    exports['qb-target']:AddTargetEntity(ped, {
+        options = {
+            {
+                type = "client",
+                event = "SkapBlackMarket:Openblackmarket",
+                icon = "fas fa-user-secret",
+                label = pedData.label or "Blackmarket",
+                args = pedKey
+            }
+        },
+        distance = 2.0
+    })
+end
 
             spawnedPeds[pedName] = ped
         end

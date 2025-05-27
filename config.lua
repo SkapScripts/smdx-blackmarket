@@ -18,6 +18,7 @@ Config.GiveAmmo = false -- Set to true and you will get ammo in weapons when a p
 Config.DefaultAmmo = 25 -- How much ammo the weapon gets if ammo is enabled
 
 Config.BlackMarketMenuType = "nui" -- nui / qb / ox
+Config.TargetSystem = "qb" -- qb/ox
 
 ------------------
 -- DISCORD LOGS --
