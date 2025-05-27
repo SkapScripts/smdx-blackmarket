@@ -1,6 +1,6 @@
-# SMDX-Blackmarket
+# SkapBlackMarket
 
-Welcome to SMDX-Blackmarket script!
+Welcome to SkapBlackMarket script!
 Discord Server: https://discord.gg/NKaDpHKkkH
 ==========================
 Preview video is coming...

@@ -40,3 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.getElementById("buy-button").addEventListener("click", function () {
+    fetch(`https://${GetParentResourceName()}/buyItem`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            item: selectedItem // <== Se till att detta innehåller name, price, itemID
+        })
+    });
+});
+
+window.addEventListener('message', function (event) {
+    const data = event.data;
+
+    if (data.action === "openUI") {
+        document.getElementById("blackmarket").style.display = "block";
+        renderItems(data.data.products); // eller vad din funktion heter
+    }
+});
+

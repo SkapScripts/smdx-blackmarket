@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+QBCore = exports['qb-core']:GetCoreObject()
 
 -----------------------
 -- CONFIGURATION --
@@ -9,15 +9,21 @@ Config.MoneyType = 'bank' -- Choose between cash/bank.
 
 Config.Lang = "ENG" -- ENG for english, SWE for Swedish.
 
-Config.DispatchSystem = "ps-disptach"-- to disable it so the police don't get alerted. Just use "none", For QB standard "qb-disptach", For ps use "ps-dispatch. If you want us to add any, Open a ticket in our discord!
+Config.DispatchSystem = "ps-disptach" -- ps-dispatch / cd-disptach / qb-dispatch / none
 Config.ChanceValue = 0.5 -- 50 = 50% chance the police will get alerted.
+
+Config.PoliceJob = 'police' -- Name of the policejob
+
+Config.GiveAmmo = false -- Set to true and you will get ammo in weapons when a player buy's it
+Config.DefaultAmmo = 25 -- How much ammo the weapon gets if ammo is enabled
+
+Config.BlackMarketMenuType = "nui" -- nui / qb / ox
 
 ------------------
 -- DISCORD LOGS --
 ------------------
-
+-- The webhook is at line 1 in server.lua
 Config.Discordlogs = true --True if you want to use discord logs.
-Config.DiscordWebhookURL = "YOU_DISCORD_WEBHOOK_URL_HERE"
 Config.DiscordName = "BlackMarket Logger"
 Config.Titel = "Item Purchase Log"
 Config.Color = 16711680 -- Red color
@@ -26,28 +32,39 @@ Config.Color = 16711680 -- Red color
 -- PED SETTINGS --
 ------------------
 
-Config.UsePed = true  -- Set to true if you want to use ped system, Set to false if you want to use item system.
-Config.BlackMarketItem = "blackmarketipad" -- Blackmarket item name.
-
-Config.PedSettings = {
-    models = { -- List with different ped models that randomizes every restart. (along with the loc)
-        "a_m_m_business_01",
-        "s_m_y_dealer_01",
-        "g_m_m_chigoon_01"
+Config.BlackMarketPeds = {
+    ["airport"] = {
+        label = "Airport",
+        model = "s_m_y_dealer_01",
+        coords = {
+            vector4(473.85, -1078.14, 28.35, 181.32),
+            vector4(480.00, -1075.00, 28.35, 90.00)
+        },
+        scenarios = { "WORLD_HUMAN_SMOKING", "WORLD_HUMAN_STAND_MOBILE" },
+        items = {
+            { name = "Pistol", itemID = "weapon_pistol", priceRange = { min = 1000, max = 2000 }, iconPath = "nui://qs-inventory/html/images/weapon_pistol.png" },
+            { name = "Knife", itemID = "weapon_knife", priceRange = { min = 500, max = 1000 }, iconPath = "nui://qs-inventory/html/images/weapon_knife.png" }
+        }
     },
-    locations = {
-        -- {coords = vector3(910.68, -1065.23, 36.94), heading = 87.06}, -- Choose where you want the ped to spawn. These is randomized between every server restart.
-        {coords = vector3(472.04, -1078.16, 28.35), heading = 186.48}
-        -- {coords = vector3(652.53, -1166.85, 11.84), heading = 185.23}
-    },
-    scenarios = { -- List of scenarios that the ped can perform (change to your own liking: https://github.com/DioneB/gtav-scenarios)
-        "WORLD_HUMAN_STAND_MOBILE",
-        "WORLD_HUMAN_SMOKING",
-        "WORLD_HUMAN_CHEERING"
-    },
-    PedChangeIntervalHours = 1 -- Time in hours before ped changes location
+    ["docks"] = {
+        label = "Docks",
+        model = "g_m_m_chigoon_01",
+        coords = {
+            vector4(470.05, -1078.16, 28.35, 178.72),
+            vector4(465.00, -1080.00, 28.35, 270.00)
+        },
+        scenarios = { "WORLD_HUMAN_CHEERING", "WORLD_HUMAN_DRUG_DEALER" },
+        items = {
+            { name = "Tazer", itemID = "weapon_stungun", priceRange = { min = 1500, max = 2500 }, iconPath = "nui://qs-inventory/html/images/weapon_stungun.png" }
+        }
+    }
 }
 
+Config.DefaultScenarios = { -- Global fallback. If no scenario is set at the ped, It will fallback to these.
+    "WORLD_HUMAN_STAND_MOBILE",
+    "WORLD_HUMAN_SMOKING",
+    "WORLD_HUMAN_CHEERING"
+}
 ------------------
 -- TIME SETTINGS --
 ------------------
@@ -60,8 +77,8 @@ Config.BlackMarketActiveTimes = {
 -- BLIP SETTINGS --
 -------------------
 Config.BlipSettings = {
-    enabled = true, -- DOn't forget to turn to false if you use item.
-    coords = Config.PedSettings.locations,
+    enabled = false, -- DOn't forget to turn to false if you use item.
+    coords = Config.BlackMarketPeds.coords,
     label = "Blackmarket",
     sprite = 306,
     color = 40,
@@ -78,19 +95,16 @@ Config.BlackMarketItems = {
         name = "Knife",
         itemID = "weapon_knife",
         priceRange = {min = 1000, max = 2000}, 
-        event = "smdx-blackmarket:giveKnife",
     },
     {
         name = "Pistol",
         itemID = "weapon_pistol",
         priceRange = {min = 1000, max = 2000},
-        event = "smdx-blackmarket:givePistol",
     },
     {
         name = "Tazer",
         itemID = "weapon_stungun",
         priceRange = {min = 1000, max = 2000},
-        event = "smdx-blackmarket:giveStungun",
     }
     -- More items here
 }

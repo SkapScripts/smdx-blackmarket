@@ -7,7 +7,8 @@ author 'SkapMicke - SMDX Development'
 description 'A blackmarket script for the QBCore Framework made by SMDX Development'
 
 shared_scripts {
-	'config.lua'
+	'config.lua',
+    '@ox_lib/init.lua'
 }
 
 files {
