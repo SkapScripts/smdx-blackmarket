@@ -1,4 +1,4 @@
-local WebhookURL = "https://discord.com/api/webhooks/1358657511808565349/Ypl1nezfaoy82Wyim0p7JnZ_PhSVs_0e4E-tttTafFSKxvL6zGcPVC4-NCVLX2MbknlU"
+local WebhookURL = "YOUR_WEBHOOK_URL_HERE"
 
 RegisterNetEvent("SkapBlackMarket:attemptPurchase", function(itemID, itemName, itemPrice)
     local src = source
